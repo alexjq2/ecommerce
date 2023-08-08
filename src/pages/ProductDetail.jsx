@@ -9,12 +9,14 @@ import Button from 'react-bootstrap/Button';
 import NewsCard from "../components/NewsCard";
 import { useDispatch, useSelector } from "react-redux";
 import { filterNewsThunk } from "../store/slices/products.slice";
+import { sendCartThunk } from "../store/slices/shoppingCart.slice";
 
 const ProductDetail = () => {
     const {id} = useParams()
     const [newDetail, setNewDetail] = useState({})
     const allProducts = useSelector(state=> state.products)
     const dispatch = useDispatch()
+    const [rate, setRate] = useState(1)
 
     useEffect(() => {
         axios
@@ -25,6 +27,23 @@ const ProductDetail = () => {
         })
           .catch(error => console.error(error))
     }, [id])
+
+    const addNewsProduct = () => {
+      const data = {
+        quantity : rate,
+        productId : newDetail.id
+      }
+      dispatch(sendCartThunk(data))
+    }
+
+    const increment = () => {
+      setRate(rate + 1)
+    }
+    const decrement = () => {
+      if(rate > 1) {
+        setRate(rate -1)
+      }
+    }
 
     return (
         <>
@@ -48,7 +67,7 @@ const ProductDetail = () => {
                </Col>
                <Col>
                 <Row className="Product-details">
-                    <h7>{newDetail.brand}</h7>
+                    <h6>{newDetail.brand}</h6>
                     <h2>{newDetail.title}</h2>
                     <p>{newDetail.description}</p>
                     <div className="Product-num">
@@ -59,14 +78,14 @@ const ProductDetail = () => {
                         <div>
                             <h6>Cantidad</h6> <br />
                             <div className="product-quantity">
-                              <button className="quantity">+</button>
-                              <div className="quantity">{1}</div>
-                              <button className="quantity">-</button>
+                              <button className="quantity" onClick={decrement}>-</button>
+                              <div className="quantity">{rate}</div>
+                              <button className="quantity" onClick={increment}>+</button>
                             </div>
                         </div>
                     </div>
                     <div className="d-grid gap-2">
-                      <Button variant="primary" size="lg">
+                      <Button variant="primary" size="lg" onClick={addNewsProduct}>
                         Agregar al carrito
                       </Button>
                     </div>

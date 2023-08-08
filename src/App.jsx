@@ -7,6 +7,7 @@ import Purchases from './pages/Purchases'
 import Home from './pages/Home'
 import Container from 'react-bootstrap/Container'
 import { useSelector} from 'react-redux/es/hooks/useSelector'
+import ProtectedRoute from './components/ProtectedRoute'
 import './App.css'
 
 function App() {
@@ -20,8 +21,10 @@ const stateLoader = useSelector(state => state.isLoader)
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/Login" element={<Login/>}/>
-          <Route path="/Purchase" element={<Purchases/>}/>
           <Route path="/ProductDetail/:id" element={<ProductDetail/>}/>
+          <Route element={<ProtectedRoute/>}>
+            <Route path="/Purchases" element={<Purchases/>}/>
+          </Route>
         </Routes>
         </Container>
         {stateLoader && <Loader/>}

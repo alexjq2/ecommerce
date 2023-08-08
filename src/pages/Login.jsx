@@ -2,13 +2,29 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "../style/loginStyle.css"
 import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    
+    const navigate = useNavigate()
+    const userData = {
+        email : email,
+        password : password
+    }
+    const submitLogin = (e => {
+        e.preventDefault()
+        axios
+          .post("https://e-commerce-api-v2.academlo.tech/api/v1/users/login", userData)
+          .then(resp => {
+            localStorage.setItem("token", resp.data.token)
+            navigate("/")
+        })
+          .catch(error => console.error(error))
+    })
     return (
-        <main>
-          <Form className='login-form'>
+        <main className='main-Login'>
+          <Form className='login-form' onSubmit={submitLogin}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Correo electrónico</Form.Label>
                 <Form.Control 
@@ -32,7 +48,7 @@ const Login = () => {
                 />
             </Form.Group>
             <Button variant="primary" type="submit">
-                Enviar
+                Ingresar
             </Button>
           </Form>
         </main>
