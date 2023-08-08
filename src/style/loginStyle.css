@@ -1,0 +1,9 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-form {
+    border: 2px solid rgba(128, 128, 128, 0.444);
+    padding: 2rem;
+}
