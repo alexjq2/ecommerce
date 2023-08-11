@@ -10,7 +10,7 @@ import NewsCard from "../components/NewsCard";
 import { useDispatch, useSelector } from "react-redux";
 import { filterNewsThunk } from "../store/slices/products.slice";
 import { sendCartThunk } from "../store/slices/shoppingCart.slice";
-
+import { useNavigate } from "react-router-dom";
 const ProductDetail = () => {
     const {id} = useParams()
     const [newDetail, setNewDetail] = useState({})
@@ -44,7 +44,15 @@ const ProductDetail = () => {
         setRate(rate -1)
       }
     }
-
+    const token = localStorage.getItem("token")
+    const navigate = useNavigate()
+    const condition = () => {
+      if (token) {
+        addNewsProduct()
+      } else {
+        navigate("/Login")
+      }
+    }
     return (
         <>
            <Container>
@@ -59,7 +67,7 @@ const ProductDetail = () => {
                          className="d-block w-100"
                          src={data.url}
                          alt="Third slide"
-                         style={{maxWidth: "100%" }}
+                         style={{maxHeight:400, minHeight:400, minWidth: 370, maxWidth: 370 ,objectFit: "contain"}}
                        />
                     </Carousel.Item>                
                    ))}
@@ -85,7 +93,7 @@ const ProductDetail = () => {
                         </div>
                     </div>
                     <div className="d-grid gap-2">
-                      <Button variant="primary" size="lg" onClick={addNewsProduct}>
+                      <Button variant="primary" size="lg" onClick={condition}>
                         Agregar al carrito
                       </Button>
                     </div>
@@ -93,10 +101,10 @@ const ProductDetail = () => {
                </Col>
              </Row>
              </Col>
-             <Col>
+             <Col style={{marginTop:20}}>
                <Row xs={1} md={3}>
                {allProducts?.map(item => (
-                 <Col key={item.id}>               
+                 <Col key={item.id} style={{marginTop:20}}>               
                  <NewsCard 
                  data={item}
                  />

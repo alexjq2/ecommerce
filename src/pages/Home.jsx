@@ -8,7 +8,8 @@ import { useDispatch, useSelector} from 'react-redux';
 import { useEffect, useState } from 'react';
 import {getNewsThunk, filterNewsThunk, nameCategoryThunk} from "../store/slices/products.slice"
 import axios from 'axios';
-import ListGroup from 'react-bootstrap/ListGroup';
+
+import Dropdown from 'react-bootstrap/Dropdown';
 const Home = () => {
 
   const dispatch = useDispatch()
@@ -28,21 +29,26 @@ const Home = () => {
   }
   
     return (
-        <>
+        <main>
             <Row >
               <Col md={3}>
-              <ListGroup>
+              <Dropdown>
+                <Dropdown.Toggle variant="Primary" id="dropdown-basic">
+                  Categorías
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
                 {categories?.map( category => (
-                  <ListGroup.Item 
+                  <Dropdown.Item 
                   key={category.id}
                   onClick={() => dispatch(filterNewsThunk(category.id))}
                   style={{cursor: "pointer"}}
-                  >{category.name}</ListGroup.Item>
-
+                  >{category.name}
+                  </Dropdown.Item>
                 ))}
-                
-              </ListGroup>
+                </Dropdown.Menu>
+              </Dropdown>
               </Col>
+
               <Col md={9}>
                 <Row>
                 <InputGroup className="mb-3">
@@ -56,10 +62,11 @@ const Home = () => {
                   <Button variant="primary" onClick={() => dispatch(nameCategoryThunk(search))}>Buscar</Button>{' '}
                 </InputGroup>
                 </Row>
+
                 <Row xs={1} md={3}>
 
                   {products?.map(item => (
-                    <Col key={item.id}>
+                    <Col key={item.id} style={{alignSelf: "stretch", maxHeight: 400, gap: 4, marginBottom: 10}}>
                     <NewsCard 
                     data={item}
                     />
@@ -69,7 +76,7 @@ const Home = () => {
                 </Row>
               </Col>
             </Row>
-        </>
+        </main>
     )
 }
 export default Home

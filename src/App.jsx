@@ -10,6 +10,7 @@ import { useSelector} from 'react-redux/es/hooks/useSelector'
 import ProtectedRoute from './components/ProtectedRoute'
 import './App.css'
 
+
 function App() {
 const stateLoader = useSelector(state => state.isLoader)
 

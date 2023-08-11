@@ -4,6 +4,8 @@ import "../style/loginStyle.css"
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import ListGroup from 'react-bootstrap/ListGroup';
+
 const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -25,6 +27,11 @@ const Login = () => {
     return (
         <main className='main-Login'>
           <Form className='login-form' onSubmit={submitLogin}>
+          <ListGroup as="ul" style={{marginBottom: 10}}>
+            <ListGroup.Item as="li" active>Usuario recomendado</ListGroup.Item>
+            <ListGroup.Item as="li">usuarioprueba123@gmail.com</ListGroup.Item>
+            <ListGroup.Item as="li" disabled>123456</ListGroup.Item>
+          </ListGroup>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Correo electrónico</Form.Label>
                 <Form.Control 
