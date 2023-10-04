@@ -17,7 +17,7 @@ const Login = () => {
     const submitLogin = (e => {
         e.preventDefault()
         axios
-          .post("https://e-commerce-api-v2.academlo.tech/api/v1/users/login", userData)
+          .post("https://ecommerce-api-hnfp.onrender.com/users/login", userData)
           .then(resp => {
             localStorage.setItem("token", resp.data.token)
             navigate("/")
