@@ -16,7 +16,7 @@ export const productsSlice = createSlice({
 export const getNewsThunk = () => (dispatch) => {
     dispatch(setIsLoader(true))
     axios
-    .get("https://e-commerce-api-v2.academlo.tech/api/v1/products")
+    .get("https://ecommerce-api-hnfp.onrender.com/products")
     .then(resp => dispatch(setNews(resp.data)))
     .catch(error => console.error(error))
     .finally( () => dispatch(setIsLoader(false)))
@@ -24,7 +24,7 @@ export const getNewsThunk = () => (dispatch) => {
 export const filterNewsThunk = (data) => (dispatch) => {
     dispatch( setIsLoader(true))
     axios
-    .get(`https://e-commerce-api-v2.academlo.tech/api/v1/products?categoryId=${data}`)
+    .get(`https://ecommerce-api-hnfp.onrender.com/products?categoryId=${data}`)
     .then(resp => dispatch( setNews(resp.data)))
     .catch(error => console.error(error))
     .finally(() => dispatch(setIsLoader(false)))
@@ -32,7 +32,7 @@ export const filterNewsThunk = (data) => (dispatch) => {
 export const nameCategoryThunk = (data) => (dispatch) => {
     dispatch(setIsLoader(true))
     axios
-      .get(`https://e-commerce-api-v2.academlo.tech/api/v1/products?title=${data}`)
+      .get(`https://ecommerce-api-hnfp.onrender.com/products?title=${data}`)
       .then(resp => dispatch( setNews(resp.data)))
       .catch(error => console.log(error))
       .finally(() => dispatch(setIsLoader(false)))

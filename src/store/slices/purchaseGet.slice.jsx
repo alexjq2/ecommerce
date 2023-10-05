@@ -17,7 +17,7 @@ export const getPurchaseThunk = () => (dispatch) => {
     dispatch(setIsLoader(true))
 
     axios
-      .get("https://e-commerce-api-v2.academlo.tech/api/v1/purchases", getConfig())
+      .get("https://ecommerce-api-hnfp.onrender.com/purchases", getConfig())
       .then(resp => dispatch(setPurchases(resp.data)))
       .catch(error => console.log(error))
       .finally(dispatch(setIsLoader(false))) 
@@ -26,7 +26,7 @@ export const getPurchaseThunk = () => (dispatch) => {
 export const buyThunk = () => (dispatch) => {
     dispatch(setIsLoader(true))
     axios
-      .post("https://e-commerce-api-v2.academlo.tech/api/v1/purchases", {},getConfig())
+      .post("https://ecommerce-api-hnfp.onrender.com/purchases", {},getConfig())
       .then(() => {
         dispatch(getPurchaseThunk())
         dispatch(getFavoriteThunk())

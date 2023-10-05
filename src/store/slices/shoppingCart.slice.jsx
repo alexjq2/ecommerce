@@ -15,7 +15,7 @@ export const shoppingCart = createSlice({
 export const getFavoriteThunk = () => dispatch => {
     
     axios
-      .get("https://e-commerce-api-v2.academlo.tech/api/v1/cart", getConfig())
+      .get("https://ecommerce-api-hnfp.onrender.com/cart", getConfig())
       .then(resp=> dispatch(addItemToCart(resp.data)))
       .catch(error=> console.error(error))
       
@@ -24,7 +24,7 @@ export const getFavoriteThunk = () => dispatch => {
 export const sendCartThunk = data => dispatch => {
     
     axios 
-      .post("https://e-commerce-api-v2.academlo.tech/api/v1/cart", data , getConfig())
+      .post("https://ecommerce-api-hnfp.onrender.com/cart", data , getConfig())
       .then(() => dispatch(getFavoriteThunk()))
       .catch(error => console.error(error))
       
@@ -35,7 +35,7 @@ export const updateFavoriteThunk = (id, newRate) => (dispatch) => {
         quantity : newRate
     }
       axios
-        .put(`https://e-commerce-api-v2.academlo.tech/api/v1/cart/${id}`, body, getConfig())
+        .put(`https://ecommerce-api-hnfp.onrender.com/cart/${id}`, body, getConfig())
         .then(() => dispatch(getFavoriteThunk()) )
         .catch(error => console.error(error))
         
@@ -44,7 +44,7 @@ export const updateFavoriteThunk = (id, newRate) => (dispatch) => {
 export const deleteFavoriteThunk = (id) => (dispatch) => {
     
       axios
-        .delete(`https://e-commerce-api-v2.academlo.tech/api/v1/cart/${id}`, getConfig())
+        .delete(`https://ecommerce-api-hnfp.onrender.com/cart/${id}`, getConfig())
         .then(() => dispatch(getFavoriteThunk()) )
         .catch(error => console.error(error))
         

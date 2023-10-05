@@ -20,7 +20,7 @@ const ProductDetail = () => {
 
     useEffect(() => {
         axios
-          .get(`https://e-commerce-api-v2.academlo.tech/api/v1/products/${id}`)
+          .get(`https://ecommerce-api-hnfp.onrender.com/products/${id}`)
           .then(resp => {
             setNewDetail(resp.data)
             dispatch(filterNewsThunk(resp.data.categoryId))
